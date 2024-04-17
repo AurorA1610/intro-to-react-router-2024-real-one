@@ -5,7 +5,7 @@ const Header = () => {
     <div>
       <h1>Navbar</h1>
       <nav>
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/about">About us</Link>
         <Link to="/contact">Contact us</Link>
         <Link to="/users">Users</Link>

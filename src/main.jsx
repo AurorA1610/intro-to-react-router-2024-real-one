@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Header from "./Component/Header/Header.jsx";
 import Home from "./Component/Home/Home.jsx";
 import About from "./Component/About/About.jsx";
 import Contact from "./Component/Contact/Contact.jsx";
 import Users from "./Component/Users/Users.jsx";
+import UserDetails from "./Component/UserDetails/UserDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,17 @@ const router = createBrowserRouter([
     children: [
       { path: "/about", element: <About></About> },
       { path: "/contact", element: <Contact></Contact> },
-      { path: "/users", element: <Users></Users> },
+      {
+        path: "/users",
+        element: <Users></Users>,
+        loader: () => fetch("https://jsonplaceholder.typicode.com/users"),
+      },
+      {
+        path: "/user/:userID", //colon (:) makes it dynamic. otherwise, '/user/userID' only would be valid.
+        element: <UserDetails></UserDetails>,
+        loader: ({ params }) =>
+          fetch(`https://jsonplaceholder.typicode.com/users/${params.userID}`),
+      },
     ],
   },
 ]);
